@@ -3,15 +3,15 @@ variable "key_name" {
   default = "terraform-handson-keypair"
 }
 
-resource "tls_priva" "handson_private_key" {
+resource "tls_private_key" "handson_private_key" {
   algorithm = "RSA"
   rsa_bits  = 2048
 }
 
 # ClientにKey pairを作成
 locals {
-  public_key  = "~/.ssh/id_rsa_tf.pub"
-  private_key = "~/.ssh/id_rsa_tf"
+  public_key_file  = "~/.ssh/id_rsa_tf.pub"
+  private_key_file = "~/.ssh/id_rsa_tf"
 }
 
 resource "local_file" "handson_private_key_pem" {
@@ -23,6 +23,11 @@ resource "local_file" "handson_private_key_pem" {
 resource "aws_key_pair" "handson_keypair" {
   key_name   = var.key_name
   public_key = tls_private_key.handson_private_key.public_key_openssh
+}
+
+# AMZN Linux2 の最新版amiを取得
+data "aws_ssm_parameter" "amzn2_latest_ami" {
+  name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
 
 # EC2

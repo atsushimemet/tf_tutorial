@@ -31,7 +31,7 @@ resource "aws_route_table" "handson_public_rt" {
 }
 
 # SubnetとRoute tableの関連付け
-resource "aws_route_table_a" "handson_public_rt_associate" {
+resource "aws_route_table_association" "handson_public_rt_associate" {
   subnet_id      = aws_subnet.handson_public_1a_sn.id
   route_table_id = aws_route_table.handson_public_rt.id
 }
@@ -63,17 +63,17 @@ resource "aws_security_group" "handson_ec2_sg" {
 
   ### インバウンドルール
   ingress {
-    from_port  = 22
-    to_port    = 22
-    protocol   = "tcp"
-    cidr_block = [local.allowed_cidr]
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = [local.allowed_cidr]
   }
 
   ### アウトバウンドルール
   egress {
-    from_port  = 0
-    to_port    = 0
-    protocol   = "-1"
-    cidr_block = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
