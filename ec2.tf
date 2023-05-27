@@ -37,6 +37,7 @@ resource "aws_instance" "handson_ec2" {
   availability_zone           = var.az_a
   vpc_security_group_ids      = [aws_security_group.handson_ec2_sg.id]
   subnet_id                   = aws_subnet.handson_public_1a_sn.id
-  associate_public_ip_address = var.key_name
+  associate_public_ip_address = "true"
+  key_name                    = var.key_name
   tags                        = { Name = "terraform-handson-ec2" }
 }
