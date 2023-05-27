@@ -39,5 +39,5 @@ resource "aws_instance" "handson_ec2" {
   subnet_id                   = aws_subnet.handson_public_1a_sn.id
   associate_public_ip_address = "true"
   key_name                    = var.key_name
-  tags                        = { Name = "terraform-handson-ec2" }
+  tags                        = { Name = "upd-terraform-handson-ec2" }
 }
