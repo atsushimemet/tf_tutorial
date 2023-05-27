@@ -15,4 +15,9 @@ fi
 terraform init
 terraform validate
 terraform plan
-terraform apply
+
+# 第一引数が true の場合は terraform apply を実行する
+if [[ $1 == "true" ]]; then
+  # Terraformのコマンドを実行する（例: terraform apply）
+  terraform apply
+fi
