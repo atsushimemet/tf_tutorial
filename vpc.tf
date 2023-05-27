@@ -59,20 +59,21 @@ resource "aws_security_group" "handson_ec2_sg" {
   vpc_id      = aws_vpc.handson_vpc.id
   tags        = { Name = "terraform-handson-ec2-sg" }
 
-}
 
-### インバウンドルール
-ingress {
-  from_port  = 22
-  to_port    = 22
-  protocol   = "tcp"
-  cidr_block = [local.allowed_cidr]
-}
 
-### アウトバウンドルール
-egress {
-  from_port  = 0
-  to_port    = 0
-  protocol   = "-1"
-  cidr_block = ["0.0.0.0/0"]
+  ### インバウンドルール
+  ingress {
+    from_port  = 22
+    to_port    = 22
+    protocol   = "tcp"
+    cidr_block = [local.allowed_cidr]
+  }
+
+  ### アウトバウンドルール
+  egress {
+    from_port  = 0
+    to_port    = 0
+    protocol   = "-1"
+    cidr_block = ["0.0.0.0/0"]
+  }
 }
