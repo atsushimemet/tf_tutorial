@@ -10,13 +10,13 @@ resource "tls_private_key" "handson_private_key" {
 
 # ClientにKey pairを作成
 locals {
-  public_key_file  = "~/.ssh/id_rsa_tf.pub"
-  private_key_file = "~/.ssh/id_rsa_tf"
+  public_key_file  = "id_rsa_tf.pub"
+  private_key_file = "id_rsa_tf"
 }
 
 resource "local_file" "handson_private_key_pem" {
   filename = local.private_key_file
-  content  = "$(tls_private_key.handson_private_key.private_key_pem)"
+  content  = tls_private_key.handson_private_key.private_key_pem
 }
 
 # 上記で作成した公開鍵をAWSのKey pairにインポート
